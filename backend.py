@@ -3,7 +3,7 @@ import sqlite3
 def connect():
     conn=sqlite3.connect("books.db")
     cur=conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, title text, author text, year integer, isbn interger)")
+    cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, title text, author text, year integer, isbn interger, UNIQUE(isbn))")
     conn.commit()
     conn.close()
 
@@ -44,11 +44,20 @@ def delete(id):
     conn.commit()  
     conn.close()
 
+def check_info(isbn=""):
+    conn=sqlite3.connect("books.db")
+    cur=conn.cursor()
+    cur.execute("SELECT isbn FROM book where isbn=?", (isbn,))
+    rows=cur.fetchone()
+    conn.close()
+    return rows
+
 connect()
 
 book_record = [["Atomic Habits", "James Clear", "2018", "978-0-7352-1129-2"], ["My Hero Academia", "Viz Media", "2022", "978-1-974727-15-5"], ["Green Eggs and Ham", "Dr Seuss", "1960", "978-0-394-80016-5"]]
 
 for record in book_record:
-    insert(record[0], record[1], record[2], record[3])
+        if check_info(isbn=record[3]) == None:
+            insert(record[0], record[1], record[2], record[3])
 
 print(view())
