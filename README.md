@@ -1,4 +1,4 @@
-# Desktop GUI and SQL: Book Inventory App
+# Desktop GUI and SQL (OOP): Book Inventory App
 
 * Add/Update/Delete inventory
 * Search inventory by criteria 
