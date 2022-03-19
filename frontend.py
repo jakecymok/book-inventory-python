@@ -39,7 +39,7 @@ class Window(object):
         self.e4=Entry(window,textvariable=self.isbn_text)
         self.e4.grid(row=1,column=3)
 
-        self.list1=Listbox(window, height=6,width=35)
+        self.list1=Listbox(window, height=6,width=45)
         self.list1.grid(row=2,column=0,rowspan=6,columnspan=2)
 
         sb1=Scrollbar(window)
